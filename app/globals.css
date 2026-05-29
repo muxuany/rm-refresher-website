@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-espresso font-sans antialiased;
+  background-image:
+    radial-gradient(circle at top, rgba(243, 163, 160, 0.18), transparent 28%),
+    linear-gradient(180deg, #fff8ef 0%, #fff2ee 100%);
+}
+
+::selection {
+  background: rgba(233, 111, 107, 0.22);
+}
+
+.section-shell {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.card-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.38) 50%, transparent 80%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.petal {
+  position: absolute;
+  border-radius: 999px 999px 0 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(243, 163, 160, 0.5));
+  filter: blur(0.2px);
+  opacity: 0.6;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.text-balance {
+  text-wrap: balance;
+}

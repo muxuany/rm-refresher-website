@@ -195,40 +195,46 @@ function FlavorShowcaseSlide({
         />
         {slide.pouchFeature ? (
           <div
-            className="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-[min(48vw,44rem)] flex-col justify-center py-24 pl-[9vw] pr-8 text-left lg:flex xl:pl-32 xl:pr-12"
+            className="pointer-events-none absolute inset-y-0 right-44 z-20 hidden w-[min(48vw,44rem)] flex-col justify-center py-24 pl-[9vw] pr-8 text-left lg:flex xl:pl-32 xl:pr-12"
             style={{ opacity: layout.contentOpacity }}
           >
             <PouchPanelShape />
             <div className="relative z-10">
-              <PouchDesignCallout feature={slide.pouchFeature} />
+              <PouchDesignCallout
+                feature={slide.pouchFeature}
+                ctaHref={slide.ctaHref}
+                ctaLabel={slide.ctaLabel}
+              />
             </div>
           </div>
         ) : null}
 
-        <div
-          className={`relative z-30 flex h-full justify-end transition-opacity duration-500 ${textPosition}`}
-          style={{ opacity: layout.contentOpacity }}
-        >
-          <div className="mt-28 flex max-w-[34rem] flex-col px-6 sm:px-8 lg:mt-32">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#f18a84]">
-              {slide.eyebrow}
-            </p>
-            <h1 className="mt-5 font-display text-5xl leading-[0.92] text-espresso sm:text-6xl xl:text-7xl">
-              {slide.title}
-            </h1>
-            <p className="mt-5 max-w-md text-lg leading-8 text-rosewood">
-              {slide.text}
-            </p>
-            <div className="mt-8">
-              <Link
-                href={slide.ctaHref}
-                className="inline-flex rounded-full bg-espresso px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#2f1c16]"
-              >
-                {slide.ctaLabel}
-              </Link>
+        {!slide.pouchFeature ? (
+          <div
+            className={`relative z-30 flex h-full justify-end transition-opacity duration-500 ${textPosition}`}
+            style={{ opacity: layout.contentOpacity }}
+          >
+            <div className="mt-28 flex max-w-[34rem] flex-col px-6 sm:px-8 lg:mt-32">
+              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#f18a84]">
+                {slide.eyebrow}
+              </p>
+              <h1 className="mt-5 font-display text-5xl leading-[0.92] text-espresso sm:text-6xl xl:text-7xl">
+                {slide.title}
+              </h1>
+              <p className="mt-5 max-w-md text-lg leading-8 text-rosewood">
+                {slide.text}
+              </p>
+              <div className="mt-8">
+                <Link
+                  href={slide.ctaHref}
+                  className="inline-flex rounded-full bg-espresso px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#2f1c16]"
+                >
+                  {slide.ctaLabel}
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
       </article>
     </div>
   );
@@ -236,10 +242,14 @@ function FlavorShowcaseSlide({
 
 function PouchDesignCallout({
   feature,
-  compact = false
+  compact = false,
+  ctaHref,
+  ctaLabel
 }: {
   feature: NonNullable<FlavorSlide["pouchFeature"]>;
   compact?: boolean;
+  ctaHref?: string;
+  ctaLabel?: string;
 }) {
   return (
     <div className="max-w-sm">
@@ -276,6 +286,18 @@ function PouchDesignCallout({
           </span>
         ))}
       </div>
+      {ctaHref && ctaLabel ? (
+        <div className={compact ? "mt-5" : "mt-8"}>
+          <Link
+            href={ctaHref}
+            className={`inline-flex rounded-full bg-espresso font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#2f1c16] ${
+              compact ? "px-4 py-2 text-xs" : "px-6 py-3 text-sm"
+            }`}
+          >
+            {ctaLabel}
+          </Link>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -365,37 +387,36 @@ function MobileFlavorSlide({ slide }: { slide: FlavorSlide }) {
         <div className="absolute inset-y-0 right-0 z-20 flex w-[50vw] min-w-[16rem] max-w-[28rem] flex-col justify-center py-6 pl-16 pr-4 text-left sm:w-[48vw] sm:min-w-[18rem] sm:pl-20 md:w-[46vw] md:min-w-[20rem] md:pl-24 md:pr-6 lg:hidden">
           <PouchPanelShape />
           <div className="relative z-10">
-            <PouchDesignCallout feature={slide.pouchFeature} compact />
+            <PouchDesignCallout
+              feature={slide.pouchFeature}
+              compact
+              ctaHref={slide.ctaHref}
+              ctaLabel={slide.ctaLabel}
+            />
           </div>
         </div>
       ) : null}
-      <div className="absolute inset-x-0 bottom-0 z-30 p-6 text-white">
-        <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#ffe7e2]">
-          {slide.eyebrow}
-        </p>
-        <h1
-          className={`mt-4 font-display text-5xl leading-[0.95] ${
-            slide.pouchFeature ? "max-w-[17rem] sm:max-w-sm" : "max-w-sm"
-          }`}
-        >
-          {slide.title}
-        </h1>
-        <p
-          className={`mt-4 text-base leading-7 text-[#fff1ee] ${
-            slide.pouchFeature ? "max-w-[17rem] sm:max-w-sm" : "max-w-sm"
-          }`}
-        >
-          {slide.text}
-        </p>
-        <div className="mt-7">
-          <Link
-            href={slide.ctaHref}
-            className="inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-espresso"
-          >
-            {slide.ctaLabel}
-          </Link>
+      {!slide.pouchFeature ? (
+        <div className="absolute inset-x-0 bottom-0 z-30 p-6 text-white">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#ffe7e2]">
+            {slide.eyebrow}
+          </p>
+          <h1 className="mt-4 max-w-sm font-display text-5xl leading-[0.95]">
+            {slide.title}
+          </h1>
+          <p className="mt-4 max-w-sm text-base leading-7 text-[#fff1ee]">
+            {slide.text}
+          </p>
+          <div className="mt-7">
+            <Link
+              href={slide.ctaHref}
+              className="inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-espresso"
+            >
+              {slide.ctaLabel}
+            </Link>
+          </div>
         </div>
-      </div>
+      ) : null}
     </article>
   );
 }

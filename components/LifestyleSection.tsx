@@ -11,7 +11,7 @@ export function LifestyleSection() {
               <div className="overflow-hidden rounded-[1.6rem]">
                 <Image
                   src="/images/lifestyle-drinks-desserts.png"
-                  alt="RM Refresher milk tea drinks served in cups with desserts for a cozy café-style tabletop spread"
+                  alt="RM Refresher milk tea drinks served in cups with desserts for a cozy cafe-style tabletop spread"
                   width={1672}
                   height={941}
                   className="h-full w-full object-cover transition duration-700 hover:scale-[1.02]"
@@ -26,11 +26,11 @@ export function LifestyleSection() {
                 Lifestyle
               </p>
               <h2 className="mt-4 text-balance font-display text-4xl leading-tight text-espresso sm:text-5xl">
-                Bring a café-style milk tea spread home.
+                Bring a cafe-style milk tea spread home.
               </h2>
               <p className="mt-6 text-lg leading-8 text-rosewood">
                 From peach refreshers to taro and brown sugar favorites, RM Refresher makes it
-                easy to enjoy café-style drinks alongside simple desserts and everyday treats.
+                easy to enjoy cafe-style drinks alongside simple desserts and everyday treats.
               </p>
               <p className="mt-4 text-base leading-7 text-rosewood">
                 Perfect for afternoon breaks, small gatherings, and easy at-home indulgence.

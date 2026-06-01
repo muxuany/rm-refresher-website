@@ -10,7 +10,7 @@ export function FlavorsSection() {
         <Reveal>
           <SectionHeading
             eyebrow="Three Flavors"
-            title="A signature trio designed around soft café comfort."
+            title="A signature trio designed around soft cafe comfort."
             description="Peach leads the collection with a bright floral profile, supported by creamy taro and rich brown sugar."
           />
         </Reveal>

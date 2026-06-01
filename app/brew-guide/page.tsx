@@ -11,7 +11,7 @@ export default function BrewGuidePage() {
       <Navbar />
       <SubpageHero
         eyebrow="Brew Guide"
-        title="Simple preparation for everyday café-style sipping."
+        title="Simple preparation for everyday cafe-style sipping."
         description="A quick guide for warm or chilled milk tea moments at home, in the office, or on the go."
         image="/images/product-peach-still-life.png"
         imageAlt="Peach Oolong Plum product still life used for the brew guide page"

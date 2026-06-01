@@ -9,7 +9,7 @@ export default function WholesalePage() {
       <Navbar />
       <SubpageHero
         eyebrow="Wholesale"
-        title="Bring RM Refresher into retail, café, and pantry spaces."
+        title="Bring RM Refresher into retail, cafe, and pantry spaces."
         description="Reach out for product inquiries, wholesale details, and collection availability."
         image="/images/Hero image.jpg"
         imageAlt="RM Refresher flavor lineup arranged as a wholesale brand presentation"

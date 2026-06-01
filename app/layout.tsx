@@ -17,7 +17,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "RM Refresher | Peach Oolong Plum Instant Beverage",
   description:
-    "Discover RM Refresher’s Peach Oolong Plum instant beverage powder and signature milk tea flavors."
+    "Discover RM Refresher's Peach Oolong Plum instant beverage powder and signature milk tea flavors."
 };
 
 export default function RootLayout({

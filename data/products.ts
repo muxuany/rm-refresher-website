@@ -157,7 +157,7 @@ export const brewSteps = [
   },
   {
     title: "STEP 2",
-    body: "Add 200ml warm water, around 60°C"
+    body: "Add 200ml warm water, around 60 degrees C"
   },
   {
     title: "STEP 3",

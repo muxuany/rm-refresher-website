@@ -63,7 +63,7 @@ const flavorSlides: FlavorSlide[] = [
   {
     eyebrow: "Three Signature Milk Teas",
     title: "Find Your Everyday Sip",
-    text: "Peach, taro, and brown sugar — crafted for every mood and moment.",
+    text: "Peach, taro, and brown sugar - crafted for every mood and moment.",
     image: "/images/scroll three flavors.png",
     alt: "All three RM Refresher flavors together with a blended multicolor wave accent",
     ctaLabel: "Explore Flavors",

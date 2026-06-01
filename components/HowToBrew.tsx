@@ -25,7 +25,7 @@ export function HowToBrew() {
           <SectionHeading
             eyebrow="How to Brew"
             title="Three easy steps for a soft peach milk tea moment."
-            description="Simple to make, easy to love, and polished enough for everyday café-style sipping."
+            description="Simple to make, easy to love, and polished enough for everyday cafe-style sipping."
           />
         </Reveal>
 

@@ -32,7 +32,7 @@ export function ContactSection() {
           <Reveal>
             <SectionHeading
               eyebrow="Wholesale / Contact"
-              title="Bring RM Refresher into your retail or café lineup."
+              title="Bring RM Refresher into your retail or cafe lineup."
               description="Share your business details and preferred product, and we can connect this form to an API route later without changing the UI."
             />
 
@@ -41,7 +41,7 @@ export function ContactSection() {
                 Contact for Wholesale
               </p>
               <p className="mt-4 text-lg leading-8 text-rosewood">
-                Ideal for grocery, café, office pantry, and specialty beverage placements.
+                Ideal for grocery, cafe, office pantry, and specialty beverage placements.
               </p>
             </div>
           </Reveal>

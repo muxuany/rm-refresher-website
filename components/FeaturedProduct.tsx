@@ -13,7 +13,7 @@ export function FeaturedProduct() {
         <Reveal>
           <SectionHeading
             eyebrow="Signature Highlight"
-            title="Peach Oolong Plum leads a signature trio designed for soft café-style indulgence."
+            title="Peach Oolong Plum leads a signature trio designed for soft cafe-style indulgence."
             description="Peach brings the bright floral lift, while Taro and Brown Sugar round out the lineup with comforting, creamy depth."
           />
         </Reveal>
@@ -60,7 +60,7 @@ export function FeaturedProduct() {
                   />
                 </div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-coral">
-                  Crafted for café-style sipping
+                  Crafted for cafe-style sipping
                 </p>
                 <p className="mt-5 text-base leading-7 text-[#6b4d44]">
                   From home kitchens to coffee counters, the RM Refresher collection brings

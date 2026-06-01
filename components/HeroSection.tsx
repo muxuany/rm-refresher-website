@@ -120,7 +120,7 @@ export function HeroSection() {
       <section
         id="home"
         ref={sectionRef}
-        className="relative hidden h-[400vh] bg-[#fff7f1] lg:block"
+        className="relative hidden h-[400vh] bg-white lg:block"
       >
         <div className="sticky top-0 h-screen overflow-hidden">
           <div className="relative h-full w-full">
@@ -169,12 +169,8 @@ function FlavorShowcaseSlide({
       className="absolute inset-y-0 right-0 overflow-hidden will-change-transform"
       style={{ width: layout.width, transform: layout.transform, zIndex }}
     >
-      <article
-        className={`absolute inset-y-0 right-0 h-screen w-screen overflow-hidden ${
-          slide.pouchFeature ? "bg-white" : "bg-[#fff7f1]"
-        }`}
-      >
-        <div className={`absolute inset-0 ${slide.pouchFeature ? "bg-white" : "bg-[#fff7f1]"}`} />
+      <article className="absolute inset-y-0 right-0 h-screen w-screen overflow-hidden bg-white">
+        <div className="absolute inset-0 bg-white" />
         <div className="absolute inset-0 z-10">
           <Image
             src={slide.image}
@@ -185,12 +181,12 @@ function FlavorShowcaseSlide({
             sizes="100vw"
           />
         </div>
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-[rgba(255,248,241,0.10)] via-transparent to-[rgba(255,248,241,0.06)]" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-[rgba(255,255,255,0.10)] via-transparent to-[rgba(255,255,255,0.06)]" />
         <div
           className={`absolute inset-y-0 z-20 hidden w-[58vw] lg:block ${
             slide.textAlign === "right"
-              ? "right-0 bg-gradient-to-l from-[rgba(255,248,241,0.88)] via-[rgba(255,248,241,0.58)] to-transparent"
-              : "left-0 bg-gradient-to-r from-[rgba(255,248,241,0.86)] via-[rgba(255,248,241,0.54)] to-transparent"
+              ? "right-0 bg-gradient-to-l from-[rgba(255,255,255,0.92)] via-[rgba(255,255,255,0.62)] to-transparent"
+              : "left-0 bg-gradient-to-r from-[rgba(255,255,255,0.88)] via-[rgba(255,255,255,0.56)] to-transparent"
           }`}
         />
         {slide.pouchFeature ? (

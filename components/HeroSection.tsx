@@ -315,7 +315,7 @@ function PouchPanelShape() {
         d="M9 0H100V100H0C10 88 2 76 8 65C17 52 3 42 10 31C18 18 0 9 9 0Z"
         fill="white"
         stroke="white"
-        strokeWidth="2.4"
+        strokeWidth="6"
         strokeLinejoin="round"
       />
     </svg>

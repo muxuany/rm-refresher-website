@@ -189,6 +189,11 @@ function FlavorShowcaseSlide({
               : "left-0 bg-gradient-to-r from-[rgba(255,255,255,0.88)] via-[rgba(255,255,255,0.56)] to-transparent"
           }`}
         />
+        {!slide.pouchFeature && slide.textAlign === "right" ? (
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-[min(42vw,50rem)] lg:block">
+            <PouchPanelShape />
+          </div>
+        ) : null}
         {slide.pouchFeature ? (
           <div
             className="pointer-events-none absolute inset-y-0 right-44 z-20 hidden w-[min(48vw,44rem)] flex-col justify-center py-24 pl-[9vw] pr-8 text-left lg:flex xl:pl-32 xl:pr-12"
@@ -302,7 +307,7 @@ function PouchPanelShape() {
   return (
     <svg
       aria-hidden="true"
-      className="absolute inset-0 h-full w-full drop-shadow-[-18px_0_42px_rgba(63,38,30,0.06)]"
+      className="absolute inset-0 h-full w-full"
       preserveAspectRatio="none"
       viewBox="0 0 100 100"
     >

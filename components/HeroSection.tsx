@@ -14,6 +14,7 @@ type FlavorSlide = {
   ctaLabel: string;
   ctaHref: string;
   textAlign?: "left" | "right";
+  mobileObjectPosition?: string;
   pouchFeature?: {
     eyebrow: string;
     title: string;
@@ -32,6 +33,7 @@ const flavorSlides: FlavorSlide[] = [
     ctaLabel: "Shop Now",
     ctaHref: "/flavors#peach-oolong-plum",
     textAlign: "left",
+    mobileObjectPosition: "25% center",
     pouchFeature: {
       eyebrow: "New Packaging",
       title: "New Foldable Pouch Design",
@@ -48,7 +50,8 @@ const flavorSlides: FlavorSlide[] = [
     alt: "Taro flavor slide with taro root and a lavender wave accent",
     ctaLabel: "Explore Flavor",
     ctaHref: "/flavors#taro-flavor",
-    textAlign: "right"
+    textAlign: "right",
+    mobileObjectPosition: "25% center"
   },
   {
     eyebrow: "Warm & Sweet",
@@ -58,7 +61,8 @@ const flavorSlides: FlavorSlide[] = [
     alt: "Brown Sugar flavor slide with warm brown sugar elements and a caramel wave accent",
     ctaLabel: "Explore Flavor",
     ctaHref: "/flavors#brown-sugar-flavor",
-    textAlign: "right"
+    textAlign: "right",
+    mobileObjectPosition: "25% center"
   },
   {
     eyebrow: "Three Signature Milk Teas",
@@ -68,7 +72,8 @@ const flavorSlides: FlavorSlide[] = [
     alt: "All three RM Refresher flavors together with a blended multicolor wave accent",
     ctaLabel: "Explore Flavors",
     ctaHref: "/flavors",
-    textAlign: "right"
+    textAlign: "right",
+    mobileObjectPosition: "45% center"
   }
 ];
 
@@ -381,7 +386,8 @@ function MobileFlavorSlide({ slide }: { slide: FlavorSlide }) {
         alt={slide.alt}
         fill
         priority
-        className="object-cover object-right"
+        className="object-cover"
+        style={{ objectPosition: slide.mobileObjectPosition ?? "center" }}
         sizes="100vw"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(63,38,30,0.58)] via-[rgba(63,38,30,0.15)] to-transparent" />

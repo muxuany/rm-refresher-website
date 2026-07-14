@@ -27,7 +27,7 @@ const flavorSlides: FlavorSlide[] = [
     eyebrow: "Signature Flavor",
     title: "Peach Oolong Plum",
     text: "Soft peach notes, gentle oolong depth, and a smooth plum finish.",
-    image: "/images/scroll-peach-white.png",
+    image: "/images/scroll-peach-clean.png",
     alt: "Peach Oolong Plum flavor slide with peach fruit and a soft blush wave accent",
     ctaLabel: "Shop Now",
     ctaHref: "/flavors#peach-oolong-plum",
@@ -199,7 +199,6 @@ function FlavorShowcaseSlide({
             className="pointer-events-none absolute inset-y-0 right-44 z-20 hidden w-[min(48vw,44rem)] flex-col justify-center py-24 pl-[9vw] pr-8 text-left lg:flex xl:pl-32 xl:pr-12"
             style={{ opacity: layout.contentOpacity }}
           >
-            <PouchPanelShape />
             <div className="relative z-10">
               <PouchDesignCallout
                 feature={slide.pouchFeature}

@@ -43,7 +43,7 @@ export function Footer() {
           <h2 className="text-sm font-semibold uppercase tracking-[0.3em] text-coral">
             Contact
           </h2>
-          <p className="mt-4 text-rosewood">hello@rmrefresher.com</p>
+          <p className="mt-4 text-rosewood">marsyang@rmrefresher.com</p>
           <p className="mt-2 text-rosewood">R&M Trading LLC</p>
         </div>
       </div>

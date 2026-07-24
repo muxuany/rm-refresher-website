@@ -239,3 +239,10 @@ if (sceneDeck) {
     }
   });
 }
+
+const inquiryChannel = document.querySelector('select[name="channel"]');
+const requestedChannel = new URLSearchParams(window.location.search).get("channel");
+if (inquiryChannel instanceof HTMLSelectElement && requestedChannel) {
+  const matchingOption = Array.from(inquiryChannel.options).find((option) => option.value === requestedChannel);
+  if (matchingOption) inquiryChannel.value = matchingOption.value;
+}

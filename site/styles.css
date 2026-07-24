@@ -1778,16 +1778,16 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   white-space: nowrap;
 }
 
+.hero-title-reveal {
+  opacity: 1;
+  transition: opacity 1550ms ease;
+}
+
+.hero.is-scene-intro:not(.is-copy-revealing) .hero-title-reveal {
+  opacity: 0;
+}
+
 @media (min-width: 981px) {
-  .hero-title-reveal {
-    opacity: 1;
-    transition: opacity 1550ms ease;
-  }
-
-  .hero.is-scene-intro:not(.is-copy-revealing) .hero-title-reveal {
-    opacity: 0;
-  }
-
   .hero-scene-deck {
     transform-origin: center center;
     transition: transform 1450ms cubic-bezier(0.22, 1, 0.36, 1);

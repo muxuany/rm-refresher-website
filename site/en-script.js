@@ -200,11 +200,11 @@ if (sceneDeck) {
   if (scrollCue) {
     scrollCue.addEventListener("click", () => {
       hideScrollCue();
-      const products = document.querySelector("#products");
-      if (!products) return;
+      const nextSection = hero?.nextElementSibling;
+      if (!(nextSection instanceof HTMLElement)) return;
       const startY = window.scrollY;
       const headerHeight = header?.offsetHeight ?? 0;
-      const targetY = products.getBoundingClientRect().top + startY - headerHeight;
+      const targetY = nextSection.getBoundingClientRect().top + startY - headerHeight;
       if (motionQuery.matches) {
         window.scrollTo(0, targetY);
         return;

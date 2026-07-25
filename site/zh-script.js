@@ -1,9 +1,42 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const siteNav = document.querySelector(".site-nav");
+const mobileNavigationQuery = window.matchMedia("(max-width: 980px)");
+const navGroups = Array.from(document.querySelectorAll(".nav-group"));
+const closeMobileDropdowns = () => {
+  navGroups.forEach((group) => {
+    group.classList.remove("is-open");
+    group.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+  });
+};
+
+navGroups.forEach((group, index) => {
+  const dropdown = group.querySelector(".nav-dropdown");
+  const parent = group.querySelector(".nav-parent");
+  if (!dropdown || !parent) return;
+
+  const toggle = document.createElement("button");
+  const dropdownId = `mobile-submenu-${index + 1}`;
+  toggle.className = "nav-dropdown-toggle";
+  toggle.type = "button";
+  toggle.setAttribute("aria-controls", dropdownId);
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-label", `展开${parent.textContent?.trim() || "导航"}子菜单`);
+  dropdown.id = dropdownId;
+  group.append(toggle);
+
+  toggle.addEventListener("click", () => {
+    if (!mobileNavigationQuery.matches) return;
+    const willOpen = !group.classList.contains("is-open");
+    closeMobileDropdowns();
+    group.classList.toggle("is-open", willOpen);
+    toggle.setAttribute("aria-expanded", String(willOpen));
+  });
+});
 
 if (menuToggle && siteNav) {
   menuToggle.addEventListener("click", () => {
     const isOpen = siteNav.classList.toggle("is-open");
+    if (!isOpen) closeMobileDropdowns();
     menuToggle.setAttribute("aria-expanded", String(isOpen));
     menuToggle.setAttribute("aria-label", isOpen ? "关闭导航菜单" : "打开导航菜单");
   });
@@ -11,12 +44,16 @@ if (menuToggle && siteNav) {
   siteNav.addEventListener("click", (event) => {
     const target = event.target;
     if (target instanceof HTMLAnchorElement) {
+      closeMobileDropdowns();
       siteNav.classList.remove("is-open");
       menuToggle.setAttribute("aria-expanded", "false");
       menuToggle.setAttribute("aria-label", "打开导航菜单");
     }
   });
 }
+window.addEventListener("resize", () => {
+  if (!mobileNavigationQuery.matches) closeMobileDropdowns();
+});
 
 const header = document.querySelector("[data-header]");
 

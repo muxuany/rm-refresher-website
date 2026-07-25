@@ -1291,6 +1291,65 @@
   }
 }
 
+/* Mobile navigation keeps parent links available and reveals submenus only on demand. */
+.nav-dropdown-toggle {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .site-nav .nav-group {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 40px;
+    align-items: center;
+  }
+
+  .site-nav .nav-parent {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .site-nav .nav-dropdown-toggle {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    justify-self: end;
+    padding: 0;
+    border: 1px solid rgba(18, 97, 59, 0.16);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.72);
+    cursor: pointer;
+  }
+
+  .site-nav .nav-dropdown-toggle::before {
+    width: 8px;
+    height: 8px;
+    margin-top: -4px;
+    content: "";
+    border-right: 1.5px solid var(--green-800);
+    border-bottom: 1.5px solid var(--green-800);
+    transform: rotate(45deg);
+    transition: transform 160ms ease;
+  }
+
+  .site-nav .nav-group.is-open .nav-dropdown-toggle::before {
+    margin-top: 4px;
+    transform: rotate(225deg);
+  }
+
+  .site-nav .nav-dropdown {
+    display: none;
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+
+  .site-nav .nav-group.is-open .nav-dropdown {
+    display: grid;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -4081,21 +4140,24 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   }
 
   .rm-yitai-logo-panel {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
+    grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
+    gap: 10px;
+    padding: 16px 12px;
+    justify-items: stretch;
+    text-align: initial;
   }
 
   .rm-yitai-logo-panel img {
-    max-width: 230px;
+    width: 100%;
+    max-width: none;
   }
 
   .rm-yitai-logo-panel .rm-partner-logo {
-    max-height: 54px;
+    max-height: 46px;
   }
 
   .rm-yitai-logo-panel .yitai-partner-logo {
-    max-height: 82px;
+    max-height: 46px;
   }
 
   .news-card {

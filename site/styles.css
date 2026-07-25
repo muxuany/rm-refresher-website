@@ -4687,6 +4687,31 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   display: none !important;
 }
 
+/* B2B inquiry tools */
+.b2b-product-actions,
+.b2b-filter-grid,
+.inquiry-list-items,
+.b2b-cta-grid { display: grid; gap: 12px; }
+.b2b-product-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 28px; }
+.b2b-product-actions .button { justify-content: center; }
+.product-search-item { position: relative; display: grid; min-width: 0; }
+.product-search-item .product-search-card { height: 100%; }
+.product-add-button { position: absolute; right: 12px; bottom: 12px; z-index: 1; padding: 8px 10px; border: 1px solid rgba(17, 105, 62, 0.24); border-radius: 5px; background: rgba(255, 255, 255, 0.94); color: var(--green-800); font: inherit; font-size: 13px; cursor: pointer; }
+.product-add-button:hover, .product-add-button:focus-visible { border-color: var(--green-700); background: var(--green-700); color: #fff; }
+.b2b-filter-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 14px; }
+.b2b-filter-grid label { display: grid; gap: 6px; color: var(--ink-600); font-size: 12px; font-weight: 700; }
+.b2b-filter-grid select { min-height: 38px; border: 1px solid rgba(17, 105, 62, 0.2); border-radius: 5px; background: #fff; color: var(--ink-900); font: inherit; padding: 0 9px; }
+.inquiry-list { margin: 28px 0; padding: 24px; border: 1px solid rgba(17, 105, 62, 0.16); border-radius: 6px; background: rgba(255, 255, 255, 0.76); }
+.inquiry-list h2 { margin: 0 0 16px; font-size: 22px; }
+.inquiry-list-items article { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 0; border-top: 1px solid rgba(17, 105, 62, 0.12); }
+.inquiry-list-items article:first-child { border-top: 0; }
+.inquiry-list-items p { margin: 4px 0 0; color: var(--ink-600); }
+.inquiry-list-items button { border: 0; background: none; color: var(--green-700); cursor: pointer; font: inherit; text-decoration: underline; }
+.form-file-note { color: var(--ink-600); font-size: 13px; }
+.b2b-cta-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.b2b-cta-grid .button { min-height: 70px; justify-content: center; text-align: center; }
+@media (max-width: 760px) { .b2b-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .b2b-cta-grid { grid-template-columns: 1fr; } }
+
 .product-search-card:hover {
   border-color: rgba(18, 97, 59, 0.34);
   transform: translateY(-2px);

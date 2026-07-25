@@ -116,7 +116,7 @@ if (productSearch) {
 
     cards.forEach((card) => {
       const matchIndex = matches.indexOf(card);
-      card.hidden =
+      (card.closest(".product-search-item") || card).hidden =
         matchIndex === -1 || (useLimit && matchIndex >= defaultLimit);
     });
 

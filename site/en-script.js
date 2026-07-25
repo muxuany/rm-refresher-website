@@ -75,7 +75,9 @@ if (productSearch) {
       const text = (card.dataset.search || "").toLowerCase().replace(/\s+/g, "");
       return (filter === "all" || card.dataset.category === filter) && (!query || text.includes(query));
     });
-    cards.forEach((card) => { card.hidden = !matches.includes(card); });
+    cards.forEach((card) => {
+      (card.closest(".product-search-item") || card).hidden = !matches.includes(card);
+    });
     if (status) status.textContent = matches.length + " products";
     if (empty) empty.hidden = matches.length !== 0;
   };

@@ -108,7 +108,14 @@
 
 .site-footer nav {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
+  gap: 18px;
+}
+
+.site-footer nav [data-b2b-footer-links] {
+  display: flex;
+  flex-wrap: wrap;
   gap: 18px;
 }
 
@@ -2794,6 +2801,7 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 .detail-main,
 .portal-main {
   min-height: calc(100vh - var(--header-height));
+  padding-bottom: 56px;
   background:
     linear-gradient(155deg, #e7f3e9 0%, #f8fbf8 36%, #ffffff 64%, #e4f1e7 100%);
 }
@@ -4655,7 +4663,7 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 }
 
 .product-search-results-section {
-  padding: 24px 0 48px;
+  padding: 24px 0 88px;
 }
 
 .product-search-results {
@@ -4694,9 +4702,9 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 .b2b-cta-grid { display: grid; gap: 12px; }
 .b2b-product-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 28px; }
 .b2b-product-actions .button { justify-content: center; }
-.product-search-item { position: relative; display: grid; min-width: 0; }
-.product-search-item .product-search-card { height: 100%; }
-.product-add-button { position: absolute; right: 12px; bottom: 12px; z-index: 1; padding: 8px 10px; border: 1px solid rgba(17, 105, 62, 0.24); border-radius: 5px; background: rgba(255, 255, 255, 0.94); color: var(--green-800); font: inherit; font-size: 13px; cursor: pointer; }
+.product-search-item { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
+.product-search-item .product-search-card { height: auto; }
+.product-add-button { width: 100%; min-height: 40px; padding: 8px 10px; border: 1px solid rgba(17, 105, 62, 0.24); border-radius: 5px; background: rgba(255, 255, 255, 0.94); color: var(--green-800); font: inherit; font-size: 13px; cursor: pointer; }
 .product-add-button:hover, .product-add-button:focus-visible { border-color: var(--green-700); background: var(--green-700); color: #fff; }
 .b2b-filter-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 14px; }
 .b2b-filter-grid label { display: grid; gap: 6px; color: var(--ink-600); font-size: 12px; font-weight: 700; }
@@ -5699,8 +5707,10 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   }
 
   .product-series-image img {
+    height: auto;
     min-height: 0;
-    aspect-ratio: 2 / 1;
+    aspect-ratio: auto;
+    object-fit: contain;
   }
 
   .product-series-links a {
@@ -5718,7 +5728,10 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   }
 
   .product-series-image img {
-    aspect-ratio: 4 / 3;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: auto;
+    object-fit: contain;
   }
 
   .product-series-links a {

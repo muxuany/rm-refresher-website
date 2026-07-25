@@ -4706,11 +4706,15 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 .inquiry-list-items article { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 0; border-top: 1px solid rgba(17, 105, 62, 0.12); }
 .inquiry-list-items article:first-child { border-top: 0; }
 .inquiry-list-items p { margin: 4px 0 0; color: var(--ink-600); }
-.inquiry-list-items button { border: 0; background: none; color: var(--green-700); cursor: pointer; font: inherit; text-decoration: underline; }
+.inquiry-list-items button { min-width: 88px; min-height: 40px; padding: 8px 14px; border: 1px solid rgba(17, 105, 62, 0.34); border-radius: 5px; background: #fff; color: var(--green-800); cursor: pointer; font: inherit; font-weight: 700; }
+.inquiry-list-items button:hover, .inquiry-list-items button:focus-visible { border-color: var(--green-700); background: var(--green-700); color: #fff; }
+.inquiry-notice { position: fixed; right: 24px; bottom: 24px; z-index: 120; display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 10px; max-width: min(560px, calc(100vw - 32px)); padding: 14px; border: 1px solid rgba(17, 105, 62, 0.26); border-radius: 6px; background: rgba(255, 255, 255, 0.97); box-shadow: 0 18px 45px rgba(15, 54, 34, 0.18); color: var(--green-950); }
+.inquiry-notice strong { font-size: 14px; }
+.inquiry-notice .button { min-height: 36px; padding: 7px 12px; font-size: 13px; white-space: nowrap; }
 .form-file-note { color: var(--ink-600); font-size: 13px; }
 .b2b-cta-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .b2b-cta-grid .button { min-height: 70px; justify-content: center; text-align: center; }
-@media (max-width: 760px) { .b2b-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .b2b-cta-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .b2b-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .b2b-cta-grid { grid-template-columns: 1fr; } .inquiry-list-items article { align-items: flex-start; flex-direction: column; } .inquiry-notice { right: 16px; bottom: 16px; grid-template-columns: 1fr 1fr; } .inquiry-notice strong { grid-column: 1 / -1; } }
 
 .product-search-card:hover {
   border-color: rgba(18, 97, 59, 0.34);

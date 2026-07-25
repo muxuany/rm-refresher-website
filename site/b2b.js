@@ -6,6 +6,10 @@
         inquiry: "询盘清单",
         add: "加入询盘",
         added: "已加入询盘",
+        addedNotice: "已加入询盘清单",
+        alreadyAdded: "该产品已在询盘清单中",
+        openInquiry: "打开询盘清单",
+        undo: "撤销",
         download: "下载规格页",
         empty: "尚未选择产品。可从产品中心或任一产品详情页加入询盘。",
         selected: "已选产品",
@@ -24,6 +28,10 @@
         inquiry: "Inquiry List",
         add: "Add to Inquiry",
         added: "Added to Inquiry",
+        addedNotice: "Added to Inquiry List",
+        alreadyAdded: "This product is already in the Inquiry List",
+        openInquiry: "Open Inquiry List",
+        undo: "Undo",
         download: "Download Spec Sheet",
         empty: "No products selected yet. Add products from Wholesale or any product page.",
         selected: "Selected Products",
@@ -85,12 +93,47 @@
     if (!product?.name) return false;
     const list = readList();
     const id = product.code || `${product.name}-${product.spec}`;
-    if (!list.some((item) => (item.code || `${item.name}-${item.spec}`) === id)) {
+    const isNew = !list.some((item) => (item.code || `${item.name}-${item.spec}`) === id);
+    if (isNew) {
       list.push(product);
       writeList(list);
     }
     updateListLinks();
-    return true;
+    return isNew;
+  };
+  const productId = (product) => product?.code || `${product?.name || ""}-${product?.spec || ""}`;
+  const removeProduct = (product) => {
+    const id = productId(product);
+    writeList(readList().filter((item) => productId(item) !== id));
+    updateListLinks();
+  };
+  const showInquiryNotice = (messageText, product, onUndo) => {
+    document.querySelector("[data-inquiry-notice]")?.remove();
+    const notice = document.createElement("aside");
+    notice.className = "inquiry-notice";
+    notice.dataset.inquiryNotice = "";
+    notice.setAttribute("role", "status");
+    const message = document.createElement("strong");
+    message.textContent = messageText;
+    const open = document.createElement("a");
+    open.className = "button secondary";
+    open.href = `${siteBase}inquiry.html`;
+    open.textContent = labels.openInquiry;
+    notice.append(message, open);
+    if (onUndo) {
+      const undo = document.createElement("button");
+      undo.type = "button";
+      undo.className = "button primary";
+      undo.textContent = labels.undo;
+      undo.addEventListener("click", () => {
+        removeProduct(product);
+        onUndo();
+        notice.remove();
+      });
+      notice.append(undo);
+    }
+    document.body.append(notice);
+    window.setTimeout(() => notice.remove(), 8000);
   };
   const enhanceProductPage = () => {
     const product = getProduct(document.body);
@@ -105,9 +148,9 @@
     add.dataset.addDetailInquiry = "";
     add.textContent = labels.add;
     add.addEventListener("click", () => {
-      addProduct(product);
+      const isNew = addProduct(product);
       add.textContent = labels.added;
-      window.setTimeout(() => { window.location.href = `${siteBase}inquiry.html`; }, 420);
+      showInquiryNotice(isNew ? labels.addedNotice : labels.alreadyAdded, product, isNew ? () => { add.textContent = labels.add; } : null);
     });
     const download = document.createElement("a");
     download.className = "button secondary";
@@ -142,9 +185,14 @@
       button.className = "product-add-button";
       button.textContent = labels.add;
       button.addEventListener("click", () => {
-        addProduct(getProduct(card));
+        const product = getProduct(card);
+        const isNew = addProduct(product);
         button.textContent = labels.added;
         button.disabled = true;
+        showInquiryNotice(isNew ? labels.addedNotice : labels.alreadyAdded, product, isNew ? () => {
+          button.textContent = labels.add;
+          button.disabled = false;
+        } : null);
       });
       wrapper.append(button);
     });

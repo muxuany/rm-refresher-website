@@ -159,18 +159,6 @@
     download.textContent = labels.download;
     actions.append(add, download);
     target.append(actions);
-    const existingInfo = document.querySelector(".detail-section.alt");
-    if (existingInfo && !document.querySelector("[data-b2b-product-information]")) {
-      const heading = isChinese ? "B2B 产品评审信息" : "B2B Product Review Information";
-      const fields = isChinese
-        ? [["包装形式", "以最终规格为准"], ["每箱数量", "以最终规格为准"], ["保质期", "以最终规格为准"], ["冲调 / 稀释比例", "以最终规格为准"], ["储存条件", "以最终规格为准"], ["目标渠道", "餐饮、自有品牌 / OEM、零售与经销"], ["可定制项目", "视风味、包装、标签与项目范围确认"], ["MOQ", "按产品与包装范围确认"], ["样品可用性", "视产品库存与项目评审确认"], ["适用认证", "在合规评审中提供适用资料"]]
-        : [["Packaging Format", "Confirmed by final specification"], ["Units per Case", "Confirmed by final specification"], ["Shelf Life", "Confirmed by final specification"], ["Preparation / Dilution Ratio", "Confirmed by final specification"], ["Storage Conditions", "Confirmed by final specification"], ["Target Channels", "Foodservice, private label/OEM, retail and distribution"], ["Customizable Elements", "Flavor, packaging, label and project scope"], ["MOQ", "Confirmed by product and packaging scope"], ["Sample Availability", "Subject to availability and project review"], ["Applicable Certifications", "Provided as applicable during compliance review"]];
-      const section = document.createElement("section");
-      section.className = "detail-section";
-      section.dataset.b2bProductInformation = "";
-      section.innerHTML = `<div class="section-inner detail-grid"><div><h2>${heading}</h2></div><div class="spec-grid">${fields.map(([label, value]) => `<article class="spec-card"><h3>${label}</h3><p>${value}</p></article>`).join("")}</div></div>`;
-      existingInfo.after(section);
-    }
   };
   const enhanceSearchCards = () => {
     const cards = [...document.querySelectorAll("[data-product-search-card]")];

@@ -3285,7 +3285,7 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 
 .portal-product-layout .portal-category-link {
   min-height: 178px;
-  grid-template-rows: minmax(42px, auto) minmax(42px, auto);
+  grid-template-rows: minmax(42px, auto) minmax(42px, auto) auto;
   padding-right: 18px;
   border: 1px solid rgba(18, 97, 59, 0.2);
   border-radius: 6px;
@@ -3331,6 +3331,19 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 
 .portal-product-layout .portal-category-link:active {
   transform: translateY(-1px) scale(0.99);
+}
+
+.category-detail-link {
+  margin-top: 12px;
+  color: var(--green-700);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.portal-product-layout .portal-category-link:hover .category-detail-link,
+.portal-product-layout .portal-category-link:focus-visible .category-detail-link {
+  color: var(--green-800);
 }
 
 .portal-favorites {

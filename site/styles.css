@@ -4142,7 +4142,7 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   .rm-yitai-logo-panel {
     grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
     gap: 10px;
-    padding: 16px 12px;
+    padding: 26px 12px;
     justify-items: stretch;
     text-align: initial;
   }

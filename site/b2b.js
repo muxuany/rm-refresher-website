@@ -13,6 +13,7 @@
         addCategory: "加入品类询盘",
         download: "下载产品规格页",
         downloadCategory: "下载品类规格页",
+        categoryDetail: "了解{category}",
         empty: "尚未选择产品。可从产品中心或任一产品详情页加入询盘。",
         selected: "已选产品",
         remove: "移除",
@@ -37,6 +38,7 @@
         addCategory: "Add Category to Inquiry",
         download: "Download Product Spec Sheet",
         downloadCategory: "Download Category Spec Sheet",
+        categoryDetail: "What's {category}?",
         empty: "No products selected yet. Add products from Wholesale or any product page.",
         selected: "Selected Products",
         remove: "Remove",
@@ -177,20 +179,51 @@
     actions.append(add, download);
     target.append(actions);
   };
+  const categoryDetails = {
+    "instant-beverage": {
+      en: { name: "Powder-Form Beverages", description: "Shelf-stable drink powders for retail, foodservice and everyday preparation." },
+      zh: { name: "粉末冲饮", description: "适合零售、餐饮与日常冲泡的常温储存饮品粉末。" },
+    },
+    "concentrated-beverage": {
+      en: { name: "Concentrated Beverages", description: "Flexible concentrated beverage formats for foodservice preparation and commercial programs." },
+      zh: { name: "浓缩饮品", description: "适用于餐饮调饮、后厨应用与商用项目的浓缩饮品形式。" },
+    },
+    "ready-to-drink": {
+      en: { name: "Ready-to-Drink Beverages", description: "Convenient ready-to-drink beverages for retail, dining and everyday refreshment." },
+      zh: { name: "即饮饮品", description: "适用于零售、餐饮配餐与日常饮用的开盖即饮产品。" },
+    },
+    "oat-products": {
+      en: { name: "Oat Products", description: "Pure oat and blended oat products for breakfast, nutrition and long-term household consumption." },
+      zh: { name: "燕麦产品", description: "涵盖纯燕麦与复合燕麦，服务早餐、营养补充与长期家庭消费。" },
+    },
+    "pure-oat": {
+      en: { name: "Pure Oat Series", description: "Straightforward oat products for daily breakfast and family nutrition." },
+      zh: { name: "纯燕麦系列", description: "配方简洁的燕麦产品，适合日常早餐与家庭营养。" },
+    },
+    "blended-oat": {
+      en: { name: "Blended Oat Series", description: "Oat and grain blends for convenient breakfast and varied nutrition needs." },
+      zh: { name: "复合燕麦系列", description: "燕麦与谷物复合产品，适合便捷早餐与多元营养需求。" },
+    },
+    "sour-plum": {
+      en: { name: "Sour Plum Collection", description: "Instant, ready-to-drink and concentrated sour plum products for retail and foodservice." },
+      zh: { name: "酸梅汤系列", description: "覆盖固体、即饮和浓缩形式的酸梅产品，服务零售与餐饮渠道。" },
+    },
+  };
   const enhanceCategoryPage = () => {
     const isSourPlum = window.location.pathname.endsWith("/sour-plum.html");
     const isWholesaleCategory = window.location.pathname.includes("/categories/") || isSourPlum;
     if (!isWholesaleCategory) return;
     const main = isSourPlum ? document.querySelector(".portal-main.sour-plum-page, .portal-main") : document.querySelector(".detail-main");
     const productList = isSourPlum ? main?.querySelector(".sour-product-groups") : main?.querySelector(".product-list-section");
-    const target = isSourPlum ? main?.querySelector(".sour-plum-hero-grid > div:first-child") : main?.querySelector(".detail-hero-grid > div:first-child");
-    const name = normalize(target?.querySelector("h1")?.textContent);
-    if (!main || !productList || !target || !name || target.querySelector("[data-add-category-inquiry]")) return;
+    const target = productList?.querySelector(".section-inner") || productList;
+    if (!main || !productList || !target || target.querySelector("[data-add-category-inquiry]")) return;
     const slug = window.location.pathname.split("/").pop()?.replace(/\.html$/i, "") || "category";
-    const description = normalize(target.querySelector("p.lead, p:not(.eyebrow)")?.textContent);
+    const detail = categoryDetails[slug]?.[isChinese ? "zh" : "en"];
+    const name = detail?.name || normalize(document.querySelector("h1")?.textContent) || "Category";
+    const description = detail?.description || "";
     const category = { code: `CATEGORY-${slug.toUpperCase()}`, name, spec: description, category: name, href: window.location.pathname };
     const actions = document.createElement("div");
-    actions.className = "b2b-product-actions";
+    actions.className = "b2b-product-actions category-product-actions";
     const add = document.createElement("button");
     add.type = "button";
     add.className = "button primary";
@@ -206,8 +239,12 @@
     download.href = `/assets/downloads/category-specs/RM-category-${slug}.pdf`;
     download.setAttribute("download", "");
     download.textContent = labels.downloadCategory;
-    actions.append(add, download);
-    target.append(actions);
+    const detailLink = document.createElement("a");
+    detailLink.className = "button secondary";
+    detailLink.href = isSourPlum ? `category-details.html?category=${encodeURIComponent(slug)}` : `../category-details.html?category=${encodeURIComponent(slug)}`;
+    detailLink.textContent = labels.categoryDetail.replace("{category}", name);
+    actions.append(add, download, detailLink);
+    target.prepend(actions);
   };
   const enhanceSearchCards = () => {
     const addButton = (card, target) => {

@@ -5853,11 +5853,13 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 /* Keep mobile parent links as direct destinations; the adjacent chevron alone expands a submenu. */
 @media (max-width: 980px) {
   .site-nav .nav-dropdown,
+  .site-nav .nav-group:hover .nav-dropdown,
   .site-nav .nav-group:focus-within .nav-dropdown {
     display: none;
   }
 
   .site-nav .nav-group.is-open .nav-dropdown,
+  .site-nav .nav-group.is-open:hover .nav-dropdown,
   .site-nav .nav-group.is-open:focus-within .nav-dropdown {
     display: grid;
   }

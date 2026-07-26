@@ -5822,3 +5822,14 @@ html[lang="en"] .milk-tea-hero-copy h1 {
     font-size: 13px;
   }
 }
+
+/* Keep mobile parent links as direct destinations; the adjacent chevron alone expands a submenu. */
+@media (max-width: 980px) {
+  .site-nav .nav-dropdown {
+    display: none;
+  }
+
+  .site-nav .nav-group.is-open .nav-dropdown {
+    display: grid;
+  }
+}

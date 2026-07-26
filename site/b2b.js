@@ -10,7 +10,9 @@
         alreadyAdded: "该产品已在询盘清单中",
         openInquiry: "打开询盘清单",
         undo: "撤销",
-        download: "下载规格页",
+        addCategory: "加入品类询盘",
+        download: "下载产品规格页",
+        downloadCategory: "下载品类规格页",
         empty: "尚未选择产品。可从产品中心或任一产品详情页加入询盘。",
         selected: "已选产品",
         remove: "移除",
@@ -32,7 +34,9 @@
         alreadyAdded: "This product is already in the Inquiry List",
         openInquiry: "Open Inquiry List",
         undo: "Undo",
-        download: "Download Spec Sheet",
+        addCategory: "Add Category to Inquiry",
+        download: "Download Product Spec Sheet",
+        downloadCategory: "Download Category Spec Sheet",
         empty: "No products selected yet. Add products from Wholesale or any product page.",
         selected: "Selected Products",
         remove: "Remove",
@@ -64,16 +68,16 @@
     });
   };
   const getProduct = (source) => {
-    const card = source.closest("[data-product-search-card]");
+    const card = source.closest(".product-search-card, .product-card");
     if (card) {
-      const small = card.querySelector("small")?.textContent || "";
+      const small = card.querySelector("small, .product-card-copy > span")?.textContent || "";
       const code = small.match(/(?:Product|产品编号)\s*(\d{3})/i)?.[1] || "";
       return {
         code,
-        name: normalize(card.querySelector("strong")?.textContent),
-        spec: normalize(card.querySelector("em")?.textContent),
-        category: normalize(small.split("·")[0]),
-        href: card.getAttribute("href") || "",
+        name: normalize(card.querySelector("strong, h3")?.textContent),
+        spec: normalize(card.querySelector("em, small")?.textContent),
+        category: normalize(card.classList.contains("product-card") ? card.closest(".detail-main")?.querySelector("h1")?.textContent : small.split("·")[0]),
+        href: card.getAttribute("href") || card.querySelector(".product-card-image")?.getAttribute("href") || "",
       };
     }
     const main = source.matches?.(".detail-main") ? source : source.closest?.(".detail-main") || document.querySelector(".detail-main");
@@ -136,6 +140,7 @@
     window.setTimeout(() => notice.remove(), 8000);
   };
   const enhanceProductPage = () => {
+    if (document.querySelector(".product-list-section")) return;
     const product = getProduct(document.body);
     if (!product) return;
     const target = document.querySelector(".detail-hero-grid > div:first-child");
@@ -160,17 +165,42 @@
     actions.append(add, download);
     target.append(actions);
   };
+  const enhanceCategoryPage = () => {
+    const main = document.querySelector(".detail-main");
+    const productList = main?.querySelector(".product-list-section");
+    const target = main?.querySelector(".detail-hero-grid > div:first-child");
+    const name = normalize(target?.querySelector("h1")?.textContent);
+    if (!main || !productList || !target || !name || target.querySelector("[data-add-category-inquiry]")) return;
+    const slug = window.location.pathname.split("/").pop()?.replace(/\.html$/i, "") || "category";
+    const description = normalize(target.querySelector("p:not(.eyebrow)")?.textContent);
+    const category = { code: `CATEGORY-${slug.toUpperCase()}`, name, spec: description, category: name, href: window.location.pathname };
+    const actions = document.createElement("div");
+    actions.className = "b2b-product-actions";
+    const add = document.createElement("button");
+    add.type = "button";
+    add.className = "button primary";
+    add.dataset.addCategoryInquiry = "";
+    add.textContent = labels.addCategory;
+    add.addEventListener("click", () => {
+      const isNew = addProduct(category);
+      add.textContent = labels.added;
+      showInquiryNotice(isNew ? labels.addedNotice : labels.alreadyAdded, category, isNew ? () => { add.textContent = labels.addCategory; } : null);
+    });
+    const download = document.createElement("a");
+    download.className = "button secondary";
+    download.href = `/assets/downloads/category-specs/RM-category-${slug}.pdf`;
+    download.setAttribute("download", "");
+    download.textContent = labels.downloadCategory;
+    actions.append(add, download);
+    target.append(actions);
+  };
   const enhanceSearchCards = () => {
-    const cards = [...document.querySelectorAll("[data-product-search-card]")];
-    cards.forEach((card) => {
-      if (card.parentElement?.classList.contains("product-search-item")) return;
-      const wrapper = document.createElement("article");
-      wrapper.className = "product-search-item";
-      card.parentElement?.insertBefore(wrapper, card);
-      wrapper.append(card);
+    const addButton = (card, target) => {
+      if (target.querySelector("[data-add-card-inquiry]")) return;
       const button = document.createElement("button");
       button.type = "button";
       button.className = "product-add-button";
+      button.dataset.addCardInquiry = "";
       button.textContent = labels.add;
       button.addEventListener("click", () => {
         const product = getProduct(card);
@@ -182,8 +212,17 @@
           button.disabled = false;
         } : null);
       });
-      wrapper.append(button);
+      target.append(button);
+    };
+    [...document.querySelectorAll(".product-search-card")].forEach((card) => {
+      if (card.parentElement?.classList.contains("product-search-item")) return;
+      const wrapper = document.createElement("article");
+      wrapper.className = "product-search-item";
+      card.parentElement?.insertBefore(wrapper, card);
+      wrapper.append(card);
+      addButton(card, wrapper);
     });
+    [...document.querySelectorAll(".product-card")].forEach((card) => addButton(card, card.querySelector(".product-card-copy") || card));
   };
   const formatData = (card) => {
     const title = normalize(card.querySelector("strong")?.textContent).toLowerCase();
@@ -302,10 +341,18 @@
       if (option) channel.value = option.value;
     }
   }
+  const requestedProduct = new URLSearchParams(window.location.search).get("product");
+  const requestedCode = new URLSearchParams(window.location.search).get("code");
+  if (requestedProduct) {
+    document.querySelectorAll('[data-b2b-form] input[name="Products of interest"], [data-b2b-form] input[name="感兴趣产品"]').forEach((field) => {
+      if (field instanceof HTMLInputElement && !field.value) field.value = requestedCode ? `${requestedProduct} (Product ${requestedCode})` : requestedProduct;
+    });
+  }
   addNavInquiry();
   addFooterLinks();
   updateListLinks();
   enhanceProductPage();
+  enhanceCategoryPage();
   enhanceSearchCards();
   addSearchFilters();
   renderInquiryPage();

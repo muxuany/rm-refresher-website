@@ -140,6 +140,7 @@
     window.setTimeout(() => notice.remove(), 8000);
   };
   const enhanceProductPage = () => {
+    if (!window.location.pathname.includes("/products/")) return;
     if (document.querySelector(".product-list-section")) return;
     const product = getProduct(document.body);
     if (!product) return;
@@ -166,6 +167,8 @@
     target.append(actions);
   };
   const enhanceCategoryPage = () => {
+    const isWholesaleCategory = window.location.pathname.includes("/categories/") || window.location.pathname.endsWith("/sour-plum.html");
+    if (!isWholesaleCategory) return;
     const main = document.querySelector(".detail-main");
     const productList = main?.querySelector(".product-list-section");
     const target = main?.querySelector(".detail-hero-grid > div:first-child");
@@ -300,8 +303,13 @@
   };
   const addNavInquiry = () => {
     const nav = document.querySelector(".site-nav");
-    const cta = nav?.querySelector(".nav-cta");
-    if (!nav || nav.querySelector("[data-inquiry-nav]")) return;
+    if (!nav) return;
+    const existing = nav.querySelector("[data-inquiry-nav], a[href$='inquiry.html']");
+    if (existing) {
+      existing.dataset.inquiryNav = "";
+      return;
+    }
+    const cta = nav.querySelector(".nav-cta");
     const link = document.createElement("a");
     link.href = `${siteBase}inquiry.html`;
     link.dataset.inquiryNav = "";

@@ -5507,6 +5507,17 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   line-height: 1.75;
 }
 
+.milk-tea-flavor-inquiry {
+  margin-top: 18px;
+  border-color: rgba(93, 49, 42, 0.22);
+  color: var(--milk-espresso);
+}
+
+.milk-tea-flavor-inquiry:hover {
+  border-color: var(--milk-coral);
+  color: var(--milk-espresso);
+}
+
 .milk-tea-ingredient-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -5831,5 +5842,18 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 
   .site-nav .nav-group.is-open .nav-dropdown {
     display: grid;
+  }
+}
+
+/* Detail navigation reserves the left edge for the previous page and the right edge for the next page. */
+.detail-pagination > div {
+  width: 100%;
+  justify-content: space-between;
+}
+
+@media (max-width: 980px) {
+  .detail-pagination > div {
+    width: 100%;
+    justify-content: space-between;
   }
 }

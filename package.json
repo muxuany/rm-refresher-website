@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rm -rf out && cp -R site out"
+    "build": "mkdir -p out && rsync -a --delete --exclude='.DS_Store' site/ out/"
   }
 }

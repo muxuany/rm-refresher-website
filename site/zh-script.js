@@ -2,6 +2,9 @@ const menuToggle = document.querySelector(".menu-toggle");
 const siteNav = document.querySelector(".site-nav");
 const mobileNavigationQuery = window.matchMedia("(max-width: 980px)");
 const navGroups = Array.from(document.querySelectorAll(".nav-group"));
+if (window.location.pathname === "/zh/index.html") {
+  window.history.replaceState(null, "", `/zh/${window.location.search}${window.location.hash}`);
+}
 const closeMobileDropdowns = () => {
   navGroups.forEach((group) => {
     group.classList.remove("is-open");

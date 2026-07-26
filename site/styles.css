@@ -647,6 +647,22 @@
   gap: 9px;
 }
 
+.compact-product-inquiry-item {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.compact-product-inquiry-item .compact-product-link {
+  flex: 1 1 auto;
+}
+
+.compact-product-inquiry-item .product-add-button {
+  min-height: 36px;
+  font-size: 12px;
+}
+
 .compact-product-link {
   display: grid;
   min-height: 168px;

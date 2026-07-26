@@ -68,8 +68,19 @@
     });
   };
   const getProduct = (source) => {
-    const card = source.closest(".product-search-card, .product-card");
+    const card = source.closest(".product-search-card, .product-card, .compact-product-link");
     if (card) {
+      if (card.classList.contains("compact-product-link")) {
+        const imageSource = card.querySelector("img")?.getAttribute("src") || "";
+        const code = imageSource.match(/\/products\/(\d{3})\//)?.[1] || "";
+        return {
+          code,
+          name: normalize(card.querySelector("strong")?.textContent),
+          spec: normalize(card.querySelector("small")?.textContent),
+          category: normalize(card.closest(".sour-product-group")?.querySelector("h2")?.textContent),
+          href: card.getAttribute("href") || "",
+        };
+      }
       const small = card.querySelector("small, .product-card-copy > span")?.textContent || "";
       const code = small.match(/(?:Product|产品编号)\s*(\d{3})/i)?.[1] || "";
       return {
@@ -167,15 +178,16 @@
     target.append(actions);
   };
   const enhanceCategoryPage = () => {
-    const isWholesaleCategory = window.location.pathname.includes("/categories/") || window.location.pathname.endsWith("/sour-plum.html");
+    const isSourPlum = window.location.pathname.endsWith("/sour-plum.html");
+    const isWholesaleCategory = window.location.pathname.includes("/categories/") || isSourPlum;
     if (!isWholesaleCategory) return;
-    const main = document.querySelector(".detail-main");
-    const productList = main?.querySelector(".product-list-section");
-    const target = main?.querySelector(".detail-hero-grid > div:first-child");
+    const main = isSourPlum ? document.querySelector(".portal-main.sour-plum-page, .portal-main") : document.querySelector(".detail-main");
+    const productList = isSourPlum ? main?.querySelector(".sour-product-groups") : main?.querySelector(".product-list-section");
+    const target = isSourPlum ? main?.querySelector(".sour-plum-hero-grid > div:first-child") : main?.querySelector(".detail-hero-grid > div:first-child");
     const name = normalize(target?.querySelector("h1")?.textContent);
     if (!main || !productList || !target || !name || target.querySelector("[data-add-category-inquiry]")) return;
     const slug = window.location.pathname.split("/").pop()?.replace(/\.html$/i, "") || "category";
-    const description = normalize(target.querySelector("p:not(.eyebrow)")?.textContent);
+    const description = normalize(target.querySelector("p.lead, p:not(.eyebrow)")?.textContent);
     const category = { code: `CATEGORY-${slug.toUpperCase()}`, name, spec: description, category: name, href: window.location.pathname };
     const actions = document.createElement("div");
     actions.className = "b2b-product-actions";
@@ -226,6 +238,14 @@
       addButton(card, wrapper);
     });
     [...document.querySelectorAll(".product-card")].forEach((card) => addButton(card, card.querySelector(".product-card-copy") || card));
+    [...document.querySelectorAll(".compact-product-link")].forEach((card) => {
+      if (card.parentElement?.classList.contains("compact-product-inquiry-item")) return;
+      const wrapper = document.createElement("div");
+      wrapper.className = "compact-product-inquiry-item";
+      card.parentElement?.insertBefore(wrapper, card);
+      wrapper.append(card);
+      addButton(card, wrapper);
+    });
   };
   const formatData = (card) => {
     const title = normalize(card.querySelector("strong")?.textContent).toLowerCase();

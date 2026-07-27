@@ -5540,12 +5540,25 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   line-height: 1.75;
 }
 
-.milk-tea-flavor-inquiry {
+.milk-tea-flavor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 18px;
+}
+
+.milk-tea-flavor-actions .button {
+  flex: 1 1 168px;
+  justify-content: center;
+}
+
+.milk-tea-flavor-amazon,
+.milk-tea-flavor-inquiry {
   border-color: rgba(93, 49, 42, 0.22);
   color: var(--milk-espresso);
 }
 
+.milk-tea-flavor-amazon:hover,
 .milk-tea-flavor-inquiry:hover {
   border-color: var(--milk-coral);
   color: var(--milk-espresso);

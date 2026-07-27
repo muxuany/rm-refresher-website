@@ -13,7 +13,7 @@
         addCategory: "加入品类询盘",
         download: "下载产品规格页",
         downloadCategory: "下载品类规格页",
-        categoryDetail: "了解{category}",
+        viewCategoryProducts: "查看本品类所有产品",
         empty: "尚未选择产品。可从产品中心或任一产品详情页加入询盘。",
         selected: "已选产品",
         remove: "移除",
@@ -38,7 +38,7 @@
         addCategory: "Add Category to Inquiry",
         download: "Download Product Spec Sheet",
         downloadCategory: "Download Category Spec Sheet",
-        categoryDetail: "What's {category}?",
+        viewCategoryProducts: "View All Products in This Category",
         empty: "No products selected yet. Add products from Wholesale or any product page.",
         selected: "Selected Products",
         remove: "Remove",
@@ -213,38 +213,19 @@
     const isSourPlum = window.location.pathname.endsWith("/sour-plum.html");
     const isWholesaleCategory = window.location.pathname.includes("/categories/") || isSourPlum;
     if (!isWholesaleCategory) return;
+    if (isSourPlum) return;
     const main = isSourPlum ? document.querySelector(".portal-main.sour-plum-page, .portal-main") : document.querySelector(".detail-main");
-    const productList = isSourPlum ? main?.querySelector(".sour-product-groups") : main?.querySelector(".product-list-section");
-    const target = productList?.querySelector(".section-inner") || productList;
-    if (!main || !productList || !target || target.querySelector("[data-add-category-inquiry]")) return;
+    const productList = main?.querySelector(".product-list-section");
+    if (!main || !productList || main.querySelector(".category-simple-intro")) return;
     const slug = window.location.pathname.split("/").pop()?.replace(/\.html$/i, "") || "category";
     const detail = categoryDetails[slug]?.[isChinese ? "zh" : "en"];
     const name = detail?.name || normalize(document.querySelector("h1")?.textContent) || "Category";
     const description = detail?.description || "";
-    const category = { code: `CATEGORY-${slug.toUpperCase()}`, name, spec: description, category: name, href: window.location.pathname };
-    const actions = document.createElement("div");
-    actions.className = "b2b-product-actions category-product-actions";
-    const add = document.createElement("button");
-    add.type = "button";
-    add.className = "button primary";
-    add.dataset.addCategoryInquiry = "";
-    add.textContent = labels.addCategory;
-    add.addEventListener("click", () => {
-      const isNew = addProduct(category);
-      add.textContent = labels.added;
-      showInquiryNotice(isNew ? labels.addedNotice : labels.alreadyAdded, category, isNew ? () => { add.textContent = labels.addCategory; } : null);
-    });
-    const download = document.createElement("a");
-    download.className = "button secondary";
-    download.href = `/assets/downloads/category-specs/RM-category-${slug}.pdf`;
-    download.setAttribute("download", "");
-    download.textContent = labels.downloadCategory;
-    const detailLink = document.createElement("a");
-    detailLink.className = "button secondary";
-    detailLink.href = isSourPlum ? `category-details.html?category=${encodeURIComponent(slug)}` : `../category-details.html?category=${encodeURIComponent(slug)}`;
-    detailLink.textContent = labels.categoryDetail.replace("{category}", name);
-    actions.append(add, download, detailLink);
-    target.prepend(actions);
+    productList.id = "products";
+    const intro = document.createElement("section");
+    intro.className = "category-simple-intro";
+    intro.innerHTML = `<div class="section-inner"><p class="eyebrow">${isChinese ? "品类详情" : "Category Details"}</p><h1>${name}</h1><p>${description}</p><a class="button primary" href="#products">${labels.viewCategoryProducts}</a></div>`;
+    productList.before(intro);
   };
   const enhanceSearchCards = () => {
     const addButton = (card, target) => {

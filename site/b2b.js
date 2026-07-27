@@ -348,6 +348,7 @@
   const addNavInquiry = () => {
     const nav = document.querySelector(".site-nav");
     if (!nav) return;
+    if (nav.classList.contains("hierarchy-nav")) return;
     const existing = nav.querySelector("[data-inquiry-nav], a[href$='inquiry.html']");
     if (existing) {
       existing.dataset.inquiryNav = "";
@@ -361,6 +362,7 @@
     nav.insertBefore(link, cta || null);
   };
   const addFooterLinks = () => {
+    if (document.querySelector(".hierarchy-footer-grid")) return;
     const nav = document.querySelector(".site-footer nav");
     if (
       !nav ||
@@ -384,11 +386,14 @@
   });
   const requestedChannel = new URLSearchParams(window.location.search).get("channel");
   if (requestedChannel) {
-    const channel = document.querySelector(isChinese ? 'select[name="客户类型"]' : 'select[name="Customer Type"]');
+    const channel = document.querySelector("[data-channel-select]") || document.querySelector(isChinese ? 'select[name="客户类型"]' : 'select[name="Customer Type"]');
+    if (channel instanceof HTMLSelectElement && [...channel.options].some((item) => item.value === requestedChannel)) {
+      channel.value = requestedChannel;
+    }
     const match = (isChinese
       ? { foodservice: "餐饮渠道", "private-label-oem": "自有品牌 / OEM", "retail-grocery": "零售与商超", "distributor-support": "经销商" }
       : { foodservice: "Foodservice", "private-label-oem": "Private Label / OEM", "retail-grocery": "Retail & Grocery", "distributor-support": "Distributor" })[requestedChannel];
-    if (channel instanceof HTMLSelectElement && match) {
+    if (channel instanceof HTMLSelectElement && match && !channel.value) {
       const option = [...channel.options].find((item) => item.textContent?.trim() === match || item.textContent?.includes(match));
       if (option) channel.value = option.value;
     }

@@ -223,8 +223,14 @@
     const description = detail?.description || "";
     productList.id = "products";
     const intro = document.createElement("section");
+    const heroImage = main.querySelector(".detail-hero-img img");
     intro.className = "category-simple-intro";
-    intro.innerHTML = `<div class="section-inner"><p class="eyebrow">${isChinese ? "品类详情" : "Category Details"}</p><h1>${name}</h1><p>${description}</p><a class="button primary" href="#products">${labels.viewCategoryProducts}</a></div>`;
+    intro.innerHTML = `<div class="section-inner category-simple-grid"><div class="category-simple-copy"><p class="eyebrow">${isChinese ? "品类详情" : "Category Details"}</p><h1>${name}</h1><p>${description}</p><a class="button primary" href="#products">${labels.viewCategoryProducts}</a></div><div class="category-simple-image"></div></div>`;
+    if (heroImage) {
+      const imageCopy = heroImage.cloneNode(true);
+      imageCopy.loading = "eager";
+      intro.querySelector(".category-simple-image").appendChild(imageCopy);
+    }
     productList.before(intro);
   };
   const enhanceSearchCards = () => {

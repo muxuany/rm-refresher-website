@@ -3511,8 +3511,6 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   transform: scale(0.99);
 }
 
-}
-
 .portal-category-link::after,
 .about-overview-link::after {
   position: absolute;
@@ -4800,10 +4798,13 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 .category-product-page .oat-product-column-heading > p:last-child { display: none; }
 .category-product-page .oat-product-columns { padding-top: 0; }
 
-.category-simple-intro { padding: 74px 0 16px; }
-.category-simple-intro .section-inner { max-width: 920px; }
-.category-simple-intro h1 { max-width: 760px; margin: 0; color: var(--green-950); font-size: clamp(38px, 5vw, 62px); line-height: 1.08; }
-.category-simple-intro p:not(.eyebrow) { max-width: 720px; margin: 18px 0 26px; color: #476657; font-size: 18px; line-height: 1.6; }
+.category-simple-intro { padding: 64px 0 36px; }
+.category-simple-intro .section-inner { max-width: 1180px; }
+.category-simple-grid { display: grid; grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.72fr); align-items: center; gap: clamp(28px, 4vw, 58px); }
+.category-simple-copy h1 { max-width: 740px; margin: 0; color: var(--green-950); font-size: clamp(38px, 5vw, 62px); line-height: 1.08; }
+.category-simple-copy p:not(.eyebrow) { max-width: 720px; margin: 18px 0 26px; color: #476657; font-size: 18px; line-height: 1.6; }
+.category-simple-image { display: grid; min-height: clamp(250px, 24vw, 320px); place-items: center; overflow: hidden; border: 1px solid rgba(17, 105, 62, 0.14); border-radius: 8px; background: rgba(255, 255, 255, 0.58); box-shadow: 0 18px 45px rgba(15, 74, 43, 0.08); }
+.category-simple-image img { display: block; width: 100%; height: 100%; min-height: inherit; max-height: 340px; object-fit: contain; padding: 12px; }
 .product-search-item { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
 .product-search-item .product-search-card { height: auto; }
 .product-add-button { width: 100%; min-height: 40px; padding: 8px 10px; border: 1px solid rgba(17, 105, 62, 0.24); border-radius: 5px; background: rgba(255, 255, 255, 0.94); color: var(--green-800); font: inherit; font-size: 13px; cursor: pointer; }
@@ -4824,7 +4825,12 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 .form-file-note { color: var(--ink-600); font-size: 13px; }
 .b2b-cta-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .b2b-cta-grid .button { min-height: 70px; justify-content: center; text-align: center; }
-@media (max-width: 760px) { .b2b-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .b2b-cta-grid { grid-template-columns: 1fr; } .category-product-actions { grid-template-columns: 1fr; } .category-simple-intro { padding: 44px 0 10px; } .category-simple-intro h1 { font-size: 36px; } .category-simple-intro p:not(.eyebrow) { font-size: 16px; } .inquiry-list-items article { align-items: flex-start; flex-direction: column; } .inquiry-notice { right: 16px; bottom: 16px; grid-template-columns: 1fr 1fr; } .inquiry-notice strong { grid-column: 1 / -1; } }
+@media (max-width: 760px) { .b2b-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .b2b-cta-grid { grid-template-columns: 1fr; } .category-product-actions { grid-template-columns: 1fr; } .category-simple-intro { padding: 44px 0 16px; } .category-simple-copy h1 { font-size: 36px; } .category-simple-copy p:not(.eyebrow) { font-size: 16px; } .inquiry-list-items article { align-items: flex-start; flex-direction: column; } .inquiry-notice { right: 16px; bottom: 16px; grid-template-columns: 1fr 1fr; } .inquiry-notice strong { grid-column: 1 / -1; } }
+
+@media (max-width: 820px) {
+  .category-simple-grid { grid-template-columns: 1fr; }
+  .category-simple-image { min-height: 250px; max-width: 620px; }
+}
 
 .product-search-card:hover {
   border-color: rgba(18, 97, 59, 0.34);
@@ -5494,6 +5500,17 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   display: grid;
   align-content: start;
   min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(93, 49, 42, 0.12);
+  border-radius: 8px;
+  background: var(--card-bg);
+  box-shadow: 0 16px 36px rgba(80, 45, 35, 0.08);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.milk-tea-flavor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(80, 45, 35, 0.13);
 }
 
 .milk-tea-flavor-image {
@@ -5501,9 +5518,8 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   aspect-ratio: 4 / 3;
   place-items: center;
   overflow: hidden;
-  border-radius: 16px;
-  background: var(--card-bg);
-  box-shadow: 0 22px 58px rgba(80, 45, 35, 0.12);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.24);
 }
 
 .milk-tea-flavor-image img {
@@ -5514,13 +5530,11 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   object-position: 38% center;
 }
 
-.milk-tea-flavor-card:nth-child(n + 2) {
-  padding-top: 0;
-}
+.milk-tea-flavor-body { display: flex; min-height: 316px; flex-direction: column; padding: 22px 22px 24px; }
 
-.milk-tea-flavor-card span {
+.milk-tea-flavor-body > span {
   display: inline-flex;
-  margin-top: 18px;
+  margin-top: 0;
   color: var(--milk-coral);
   font-size: 12px;
   font-weight: 800;
@@ -5528,13 +5542,13 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   text-transform: uppercase;
 }
 
-.milk-tea-flavor-card h3 {
+.milk-tea-flavor-body h3 {
   margin: 8px 0 8px;
   color: var(--milk-espresso);
   font-size: clamp(24px, 3vw, 36px);
 }
 
-.milk-tea-flavor-card p {
+.milk-tea-flavor-body p {
   margin: 0;
   color: var(--milk-rose);
   line-height: 1.75;
@@ -5544,11 +5558,17 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: auto;
+  padding-top: 18px;
 }
 
 .milk-tea-flavor-actions .button {
-  flex: 1 1 168px;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 42px;
+  padding: 0 12px;
+  white-space: nowrap;
+  font-size: 13px;
   justify-content: center;
 }
 
@@ -5662,6 +5682,10 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   .milk-tea-flavor-grid,
   .milk-tea-ingredient-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .category-simple-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.62fr);
   }
 
   .milk-tea-flavor-card:nth-child(n + 2) {
@@ -5798,6 +5822,15 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   .milk-tea-flavor-grid,
   .milk-tea-ingredient-grid {
     grid-template-columns: 1fr;
+  }
+
+  .category-simple-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-simple-image {
+    min-height: 250px;
+    max-width: 620px;
   }
 
   .milk-tea-flavor-image img {

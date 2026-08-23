@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Yang;Mars;;;
+FN:Mars Yang
+ORG:R&M Trading LLC
+TITLE:U.S. Market & Business Operations
+EMAIL;TYPE=INTERNET,WORK:marsyang@rmrefresher.com
+ADR;TYPE=WORK:;;5808 Lake Washington Blvd SE;Bellevue;WA;98006;United States
+URL:https://rmrefresher.com/
+NOTE:Wholesale purchasing: https://rmrefresher.com/wholesale/
+END:VCARD

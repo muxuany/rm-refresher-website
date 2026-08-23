@@ -6697,6 +6697,133 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.digital-card-section {
+  background: linear-gradient(145deg, #edf5f0 0%, #f8fbf9 58%, #e7f0eb 100%) !important;
+}
+
+.digital-card-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1.58fr);
+  gap: clamp(36px, 4vw, 62px);
+  align-items: center;
+}
+
+.digital-card-layout > .hierarchy-heading {
+  margin-bottom: 0;
+}
+
+.digital-business-card {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.75fr) minmax(0, 1.25fr);
+  min-height: 430px;
+  overflow: hidden;
+  border: 1px solid #b9d0c1;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(13, 62, 41, 0.13);
+}
+
+.business-card-brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(30px, 4vw, 46px);
+  color: #fff;
+  background: #174f39;
+}
+
+.business-card-brand img {
+  width: min(190px, 78%);
+  height: 76px;
+  margin-bottom: auto;
+  object-fit: contain;
+  object-position: left center;
+  filter: brightness(0) invert(1);
+}
+
+.business-card-brand p {
+  margin: 42px 0 10px;
+  color: #b9d9ca;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.business-card-brand h2 {
+  margin: 0 0 14px;
+  color: #fff;
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.05;
+}
+
+.business-card-brand span {
+  color: #dcebe4;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.business-card-details {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(30px, 4vw, 48px);
+}
+
+.business-card-person {
+  display: grid;
+  gap: 7px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #cfdfd5;
+}
+
+.business-card-person span,
+.business-card-details dt {
+  color: var(--green-700);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.business-card-person strong {
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1.05;
+}
+
+.business-card-details dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 28px;
+  margin: 28px 0 34px;
+}
+
+.business-card-details dl > div {
+  min-width: 0;
+}
+
+.business-card-details dd {
+  margin: 7px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.business-card-details dd a {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.business-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.business-card-actions .button {
+  min-height: 46px;
+  padding-inline: 18px;
+}
+
 .product-capability-list > .section-inner {
   display: grid;
   gap: 0;
@@ -7018,8 +7145,13 @@ html[lang="en"] .milk-tea-hero-copy h1 {
   .relationship-layout,
   .two-column-story,
   .image-story-grid,
-  .product-capability-list article {
+  .product-capability-list article,
+  .digital-card-layout {
     grid-template-columns: 1fr;
+  }
+
+  .digital-card-layout > .hierarchy-heading {
+    max-width: 680px;
   }
 
   .manufacturing-module.reverse .image-story-grid > img {
@@ -7124,6 +7256,23 @@ html[lang="en"] .milk-tea-hero-copy h1 {
 
   .image-story-grid > img {
     aspect-ratio: 16 / 11;
+  }
+
+  .digital-business-card {
+    grid-template-columns: 1fr;
+  }
+
+  .business-card-brand {
+    min-height: 300px;
+  }
+
+  .business-card-details dl {
+    grid-template-columns: 1fr;
+  }
+
+  .business-card-actions .button {
+    width: 100%;
+    justify-content: center;
   }
 
   .hierarchy-footer-grid {

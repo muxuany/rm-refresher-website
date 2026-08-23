@@ -62,7 +62,7 @@
         ],
         shopItems: [
           ["零售购买", "shop-retail.html"],
-          ["批发购买", "shop-wholesale.html"],
+          ["批发购买", "wholesale/"],
           ["大宗与定制询价", "contact.html?channel=private-label-oem#inquiry"],
           ["询盘清单", "inquiry.html"],
         ],
@@ -124,7 +124,7 @@
         ],
         shopItems: [
           ["Retail Shop", "shop-retail.html"],
-          ["Wholesale Shop", "shop-wholesale.html"],
+          ["Wholesale Shop", "wholesale/"],
           ["Bulk & Custom Inquiry", "contact.html?channel=private-label-oem#inquiry"],
           ["Inquiry List", "inquiry.html"],
         ],
@@ -203,7 +203,7 @@
           <strong>${copy.footerBusiness}</strong>
           <a href="${pageUrl("shop.html")}">${copy.shop}</a>
           <a href="${pageUrl("shop-retail.html")}">${isChinese ? "零售购买" : "Retail Shop"}</a>
-          <a href="${pageUrl("shop-wholesale.html")}">${isChinese ? "批发购买" : "Wholesale Shop"}</a>
+          <a href="${pageUrl("wholesale/")}">${isChinese ? "批发购买" : "Wholesale Shop"}</a>
           <a href="${pageUrl("samples.html")}">${isChinese ? "申请样品" : "Request Samples"}</a>
         </nav>
         <nav aria-label="${copy.footerResources}">
